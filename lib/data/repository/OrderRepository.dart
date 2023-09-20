@@ -16,8 +16,8 @@ class OrderRepository implements IOrderRepository {
     //_dio.options.baseUrl = _baseUrl;
     // Datetime format: 2021-03-01T00:00:00
     String formattedDate = after.toIso8601String();
-    Response res = await _dio
-        .get("wp-json/wc/v3/orders?status=completed&after=$formattedDate");
+    Response res = await _dio.get(
+        "wp-json/wc/v3/orders?status=completed&before=$formattedDate&per_page=100&after=2022-01-01T00:00:00");
     if (res.statusCode == 200) {
       List<Order> orders =
           res.data.map<Order>((json) => Order.fromJson(json)).toList();

@@ -20,12 +20,15 @@ Inventory _$InventoryFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Inventory {
-  int get id => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false)
+  int? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
   String get internalSku => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
+  DateTime? get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,12 +42,13 @@ abstract class $InventoryCopyWith<$Res> {
       _$InventoryCopyWithImpl<$Res, Inventory>;
   @useResult
   $Res call(
-      {int id,
+      {@JsonKey(includeToJson: false) int? id,
       String name,
       String type,
       int quantity,
       double price,
-      String internalSku});
+      String internalSku,
+      @JsonKey(name: 'created_at') DateTime? createdAt});
 }
 
 /// @nodoc
@@ -60,18 +64,19 @@ class _$InventoryCopyWithImpl<$Res, $Val extends Inventory>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? name = null,
     Object? type = null,
     Object? quantity = null,
     Object? price = null,
     Object? internalSku = null,
+    Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -92,6 +97,10 @@ class _$InventoryCopyWithImpl<$Res, $Val extends Inventory>
           ? _value.internalSku
           : internalSku // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -104,12 +113,13 @@ abstract class _$$_InventoryCopyWith<$Res> implements $InventoryCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id,
+      {@JsonKey(includeToJson: false) int? id,
       String name,
       String type,
       int quantity,
       double price,
-      String internalSku});
+      String internalSku,
+      @JsonKey(name: 'created_at') DateTime? createdAt});
 }
 
 /// @nodoc
@@ -123,18 +133,19 @@ class __$$_InventoryCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? name = null,
     Object? type = null,
     Object? quantity = null,
     Object? price = null,
     Object? internalSku = null,
+    Object? createdAt = freezed,
   }) {
     return _then(_$_Inventory(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -155,6 +166,10 @@ class __$$_InventoryCopyWithImpl<$Res>
           ? _value.internalSku
           : internalSku // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -163,18 +178,20 @@ class __$$_InventoryCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Inventory implements _Inventory {
   _$_Inventory(
-      {required this.id,
+      {@JsonKey(includeToJson: false) this.id,
       required this.name,
       required this.type,
       required this.quantity,
       required this.price,
-      required this.internalSku});
+      required this.internalSku,
+      @JsonKey(name: 'created_at') this.createdAt});
 
   factory _$_Inventory.fromJson(Map<String, dynamic> json) =>
       _$$_InventoryFromJson(json);
 
   @override
-  final int id;
+  @JsonKey(includeToJson: false)
+  final int? id;
   @override
   final String name;
   @override
@@ -185,10 +202,13 @@ class _$_Inventory implements _Inventory {
   final double price;
   @override
   final String internalSku;
+  @override
+  @JsonKey(name: 'created_at')
+  final DateTime? createdAt;
 
   @override
   String toString() {
-    return 'Inventory(id: $id, name: $name, type: $type, quantity: $quantity, price: $price, internalSku: $internalSku)';
+    return 'Inventory(id: $id, name: $name, type: $type, quantity: $quantity, price: $price, internalSku: $internalSku, createdAt: $createdAt)';
   }
 
   @override
@@ -203,13 +223,15 @@ class _$_Inventory implements _Inventory {
                 other.quantity == quantity) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.internalSku, internalSku) ||
-                other.internalSku == internalSku));
+                other.internalSku == internalSku) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, type, quantity, price, internalSku);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, type, quantity, price, internalSku, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -227,18 +249,20 @@ class _$_Inventory implements _Inventory {
 
 abstract class _Inventory implements Inventory {
   factory _Inventory(
-      {required final int id,
+      {@JsonKey(includeToJson: false) final int? id,
       required final String name,
       required final String type,
       required final int quantity,
       required final double price,
-      required final String internalSku}) = _$_Inventory;
+      required final String internalSku,
+      @JsonKey(name: 'created_at') final DateTime? createdAt}) = _$_Inventory;
 
   factory _Inventory.fromJson(Map<String, dynamic> json) =
       _$_Inventory.fromJson;
 
   @override
-  int get id;
+  @JsonKey(includeToJson: false)
+  int? get id;
   @override
   String get name;
   @override
@@ -249,6 +273,9 @@ abstract class _Inventory implements Inventory {
   double get price;
   @override
   String get internalSku;
+  @override
+  @JsonKey(name: 'created_at')
+  DateTime? get createdAt;
   @override
   @JsonKey(ignore: true)
   _$$_InventoryCopyWith<_$_Inventory> get copyWith =>

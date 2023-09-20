@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:inventory_app/application/contracts/IInventoryUseCase.dart';
 
+import '../../core/di/inventoryProvider.dart';
 import '../../core/di/orderProvider.dart';
 import '../../domain/models/Inventory.dart';
 import '../../domain/models/order.dart';
@@ -11,8 +12,12 @@ class InventoryUseCase implements IInventoryUseCase {
   final Ref ref;
 
   @override
-  Future<List<Inventory>> getInventoryFromOrders(DateTime after) async {
+  Future<List<Inventory>> getInventoryFromOrders(
+      DateTime after, DateTime before) async {
     List<Inventory> inventories = [];
+    List<Inventory> lastInventory = await ref
+        .watch(inventoryRepositoryProvider)
+        .getInventoryByDate(before); // 2021-12-30 23:00:00+00
     List<Order> orders =
         await ref.watch(orderRepositoryProvider).getOrders(after);
     if (orders.isNotEmpty) {
@@ -62,28 +67,42 @@ class InventoryUseCase implements IInventoryUseCase {
                   name: 'Griffe',
                   quantity: 1,
                   internalSku: 'EXOGR',
-                  price: 1.24));
+                  price: 0.72));
               inventories.add(Inventory(
                   id: product.id,
                   type: 'product',
                   name: 'Manschetten Arme',
                   quantity: 1,
                   internalSku: '030618MAA',
-                  price: 1.24));
+                  price: 1.62));
               inventories.add(Inventory(
                   id: product.id,
                   type: 'product',
                   name: 'Manschetten Beine',
                   quantity: 1,
                   internalSku: '030618MAB',
-                  price: 1.24));
+                  price: 1.62));
               inventories.add(Inventory(
                   id: product.id,
                   type: 'product',
                   name: 'Turnbeutel',
                   quantity: 1,
-                  internalSku: 'EXOBTL',
-                  price: 1.24));
+                  internalSku: 'EXOBAG',
+                  price: 0.98));
+              inventories.add(Inventory(
+                  id: product.id,
+                  type: 'product',
+                  name: 'Tragesystem',
+                  quantity: 1,
+                  internalSku: 'EXOSYSTEM',
+                  price: 41.98));
+              inventories.add(Inventory(
+                  id: product.id,
+                  type: 'product',
+                  name: 'Modul',
+                  quantity: 1,
+                  internalSku: 'EXOMODUL',
+                  price: 7.66));
             }
           }
           if (product.sku == '030618PII') {
@@ -129,28 +148,42 @@ class InventoryUseCase implements IInventoryUseCase {
                   name: 'Griffe',
                   quantity: 1,
                   internalSku: 'EXOGR',
-                  price: 1.24));
+                  price: 0.72));
               inventories.add(Inventory(
                   id: product.id,
                   type: 'product',
                   name: 'Manschetten Arme',
                   quantity: 1,
                   internalSku: '030618MAA',
-                  price: 1.24));
+                  price: 1.62));
               inventories.add(Inventory(
                   id: product.id,
                   type: 'product',
                   name: 'Manschetten Beine',
                   quantity: 1,
                   internalSku: '030618MAB',
-                  price: 1.24));
+                  price: 1.62));
               inventories.add(Inventory(
                   id: product.id,
                   type: 'product',
                   name: 'Turnbeutel',
                   quantity: 1,
-                  internalSku: 'EXOBTL',
-                  price: 1.24));
+                  internalSku: 'EXOBAG',
+                  price: 0.98));
+              inventories.add(Inventory(
+                  id: product.id,
+                  type: 'product',
+                  name: 'Tragesystem',
+                  quantity: 1,
+                  internalSku: 'EXOSYSTEM',
+                  price: 41.98));
+              inventories.add(Inventory(
+                  id: product.id,
+                  type: 'product',
+                  name: 'Modul',
+                  quantity: 1,
+                  internalSku: 'EXOMODUL',
+                  price: 7.66));
             }
           }
           if (product.sku == '030618SI') {
@@ -175,21 +208,35 @@ class InventoryUseCase implements IInventoryUseCase {
                   name: 'Manschetten Arme',
                   quantity: 1,
                   internalSku: '030618MAA',
-                  price: 1.24));
+                  price: 1.62));
               inventories.add(Inventory(
                   id: product.id,
                   type: 'product',
                   name: 'Manschetten Beine',
                   quantity: 1,
                   internalSku: '030618MAB',
-                  price: 1.24));
+                  price: 1.62));
               inventories.add(Inventory(
                   id: product.id,
                   type: 'product',
                   name: 'Turnbeutel',
                   quantity: 1,
-                  internalSku: 'EXOBTL',
-                  price: 1.24));
+                  internalSku: 'EXOBAG',
+                  price: 0.98));
+              inventories.add(Inventory(
+                  id: product.id,
+                  type: 'product',
+                  name: 'Tragesystem',
+                  quantity: 1,
+                  internalSku: 'EXOSYSTEM',
+                  price: 41.98));
+              inventories.add(Inventory(
+                  id: product.id,
+                  type: 'product',
+                  name: 'Modul',
+                  quantity: 1,
+                  internalSku: 'EXOMODUL',
+                  price: 7.66));
             }
           }
           if (product.sku == '030618SII') {
@@ -214,21 +261,35 @@ class InventoryUseCase implements IInventoryUseCase {
                   name: 'Manschetten Arme',
                   quantity: 1,
                   internalSku: '030618MAA',
-                  price: 1.24));
+                  price: 1.62));
               inventories.add(Inventory(
                   id: product.id,
                   type: 'product',
                   name: 'Manschetten Beine',
                   quantity: 1,
                   internalSku: '030618MAB',
-                  price: 1.24));
+                  price: 1.62));
               inventories.add(Inventory(
                   id: product.id,
                   type: 'product',
                   name: 'Turnbeutel',
                   quantity: 1,
-                  internalSku: 'EXOBTL',
-                  price: 1.24));
+                  internalSku: 'EXOBAG',
+                  price: 0.98));
+              inventories.add(Inventory(
+                  id: product.id,
+                  type: 'product',
+                  name: 'Tragesystem',
+                  quantity: 1,
+                  internalSku: 'EXOSYSTEM',
+                  price: 41.98));
+              inventories.add(Inventory(
+                  id: product.id,
+                  type: 'product',
+                  name: 'Modul',
+                  quantity: 1,
+                  internalSku: 'EXOMODUL',
+                  price: 7.66));
             }
           }
           if (product.sku == 'EXOBABE05') {
@@ -366,13 +427,29 @@ class InventoryUseCase implements IInventoryUseCase {
           /* if (product.sku == '030618MA') {
 
           } */
-          /* if (product.sku == 'EXOCAP') {
-
+          if (product.sku == 'EXOCAP') {
+            for (var i = 0; i < product.quantity; i++) {
+              inventories.add(Inventory(
+                  id: product.id,
+                  type: 'product',
+                  name: 'Cap',
+                  quantity: 1,
+                  internalSku: 'EXOCAP',
+                  price: 3.48));
+            }
           }
           if (product.sku == 'EXOBTL') {
-
+            for (var i = 0; i < product.quantity; i++) {
+              inventories.add(Inventory(
+                  id: product.id,
+                  type: 'product',
+                  name: 'Trinkflasche',
+                  quantity: 1,
+                  internalSku: 'EXOBTL',
+                  price: 4.06));
+            }
           }
-          if (product.sku == 'EXOBAG') {
+          /* if (product.sku == 'EXOBAG') {
 
           }
           if (product.sku == 'EXOGR') {
@@ -400,6 +477,25 @@ class InventoryUseCase implements IInventoryUseCase {
       }
     });
 
-    return sortedInventories;
+    List<Inventory> newInventory = lastInventory.toList();
+
+    lastInventory.forEach((lastI) {
+      sortedInventories.forEach((newI) {
+        if (newI.internalSku == lastI.internalSku) {
+          var inventory = lastI.copyWith(
+              quantity: lastI.quantity - newI.quantity,
+              price: lastI.price - newI.price);
+          var inventoryToDelete = newInventory
+              .where((element) => element.internalSku == lastI.internalSku)
+              .firstOrNull;
+          if (inventoryToDelete != null) {
+            newInventory.remove(inventoryToDelete);
+          }
+          newInventory.add(inventory);
+        }
+      });
+    });
+
+    return newInventory;
   }
 }
