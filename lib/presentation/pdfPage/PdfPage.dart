@@ -37,7 +37,8 @@ class PdfPage extends StatelessWidget {
                 pw.Row(
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
-                      pw.Header(text: "Lagerstand: $date", level: 1),
+                      pw.Header(
+                          text: "Lagerstand: ${date.split(" ")[0]}", level: 1),
                       /* pw.Image(pw.MemoryImage(byteList),
                           fit: pw.BoxFit.fitHeight, height: 100, width: 100) */
                     ]),
@@ -45,18 +46,27 @@ class PdfPage extends StatelessWidget {
                 pw.Row(
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
-                      pw.Paragraph(text: "Name"),
+                      /* pw.Paragraph(text: "Name"),
                       pw.Paragraph(text: "Anzahl"),
-                      pw.Paragraph(text: "Preis in Euro"),
+                      pw.Paragraph(text: "Preis in Euro"), */
+                      pw.Container(width: 250, child: pw.Text("Name")),
+                      pw.Container(width: 250, child: pw.Text("Anzahl")),
+                      pw.Container(width: 250, child: pw.Text("Preis in Euro")),
                     ]),
                 pw.Column(children: [
                   for (var inventory in inventoryList)
                     pw.Row(
                         mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                         children: [
-                          pw.Paragraph(text: inventory.name),
-                          pw.Paragraph(text: inventory.quantity.toString()),
-                          pw.Paragraph(text: inventory.price.toString()),
+                          pw.Container(
+                              width: 250, child: pw.Text(inventory.name)),
+                          pw.Container(
+                              width: 250,
+                              child: pw.Text(inventory.quantity.toString())),
+                          pw.Container(
+                              width: 250,
+                              child:
+                                  pw.Text(inventory.price.toStringAsFixed(2))),
                         ]),
                 ])
               ]);
