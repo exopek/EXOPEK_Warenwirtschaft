@@ -67,8 +67,8 @@ class _InventoryPageState extends ConsumerState<InventoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    final inventoryListControllerValue =
-        ref.watch(inventoryListControllerProvider);
+    /* final inventoryListControllerValue =
+        ref.watch(inventoryListControllerProvider); */
     final inventoryList = ref.watch(inventoryListProvider);
     return Scaffold(
         body: SingleChildScrollView(
