@@ -13,13 +13,13 @@ class InventoryUseCase implements IInventoryUseCase {
 
   @override
   Future<List<Inventory>> getInventoryFromOrders(
-      DateTime after, DateTime before) async {
+      DateTime end, DateTime start) async {
     List<Inventory> inventories = [];
     List<Inventory> lastInventory = await ref
         .watch(inventoryRepositoryProvider)
-        .getInventoryByDate(before); // 2021-12-30 23:00:00+00
+        .getInventoryByDate(start); // 2021-12-30 23:00:00+00
     List<Order> orders =
-        await ref.watch(orderRepositoryProvider).getOrders(after);
+        await ref.watch(orderRepositoryProvider).getOrders(start, end);
     if (orders.isNotEmpty) {
       orders.forEach((element) {
         element.products.forEach((product) {

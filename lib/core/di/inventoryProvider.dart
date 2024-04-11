@@ -9,8 +9,8 @@ final inventoryUseCaseProvider = Provider((ref) => InventoryUseCase(ref));
 
 final inventoryListProvider =
     FutureProvider.autoDispose<List<Inventory>>((ref) async {
-  final selectedDate = ref.watch(datePickerStateProvider);
-  final refDate = ref.watch(lastDateInventoryStateProvider);
+  final selectedDate = ref.watch(datePickerStateProvider); // end
+  final refDate = ref.watch(lastDateInventoryStateProvider); // start
   final data = await ref
       .watch(inventoryUseCaseProvider)
       .getInventoryFromOrders(selectedDate, refDate);

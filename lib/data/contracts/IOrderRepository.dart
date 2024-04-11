@@ -1,5 +1,5 @@
 abstract class IOrderRepository {
-  Future<List<dynamic>> getOrders(DateTime after);
+  Future<List<dynamic>> getOrders(DateTime start, DateTime end);
 
   //Future<dynamic> getWorkout(String id);
   /* Future<Workout> getWorkout(String id);

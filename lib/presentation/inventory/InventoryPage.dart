@@ -111,6 +111,7 @@ class _InventoryPageState extends ConsumerState<InventoryPage> {
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'Start',
+                            hintText: 'yyyy-mm-dd'
                           ),
                         ),
                         TextField(
